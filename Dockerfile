@@ -28,3 +28,4 @@ php7.2-bcmath \
 php7.2-zip \
 php7.2-dom && \
 apt-get install -y php-xdebug
+CMD ["service", "jenkins", "start"]
