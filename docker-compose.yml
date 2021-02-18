@@ -1,0 +1,15 @@
+version: "3.2"
+services:
+  jenkins:
+    build: .
+    #image: jenkins-php72
+    ports:
+     - "8080:8080"
+     - "50000:50000"
+    volumes:
+     - "./:/var/lib/jenkins"
+    command: bash -c "service jenkins start && tail -f /var/log/jenkins/jenkins.log"
+
+networks:
+  jenkins:
+    driver: bridge
