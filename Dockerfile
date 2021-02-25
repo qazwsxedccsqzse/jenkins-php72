@@ -1,5 +1,5 @@
 FROM phusion/baseimage:focal-1.0.0alpha1-amd64
-RUN apt-get update && apt-get install -y wget tar make libpcre3 libpcre3-dev openssl libssl-dev openssl libssl-dev supervisor software-properties-common git
+RUN apt-get update && apt-get install -y wget tar make libpcre3 libpcre3-dev openssl libssl-dev openssl libssl-dev supervisor software-properties-common git vim
 RUN apt-get install -y default-jdk
 RUN apt-get install -y openjdk-11-jdk-headless
 RUN update-alternatives --config java
@@ -26,11 +26,11 @@ php7.2-xml \
 php7.2-dev \
 php7.2-bcmath \
 php7.2-zip \
-php7.2-dom && \
-apt-get install -y php-xdebug
+php7.2-dom \
+php7.2-phpdbg
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
 php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" && \
 php composer-setup.php && \
 php -r "unlink('composer-setup.php');" && \
-mv composer.phar /usr/local/bin/composer
+mv composer.phar /usr/local/bin/composer && composer self-update --1
 WORKDIR /var/lib/jenkins
